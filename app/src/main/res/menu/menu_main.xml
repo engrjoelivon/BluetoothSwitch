@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="aivco.com.bluetooth_exe.MainActivity">
+
+    <item
+        android:id="@+id/server"
+        android:orderInCategory="100"
+        android:title="@string/startserver"
+        app:showAsAction="never" />
+</menu>

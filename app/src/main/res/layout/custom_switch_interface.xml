@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- ui to design a custom interface for every switch.parent is CustomeAdapterForListView -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="@dimen/switch_interface_height"
+    android:descendantFocusability="blocksDescendants"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"
+        android:src="@android:drawable/stat_sys_data_bluetooth"
+        android:focusableInTouchMode="false"
+        android:id="@+id/connection_status"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="0.4"
+        android:descendantFocusability="blocksDescendants"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:id="@+id/switch_name"
+            android:textColor="@color/textcolor"
+            android:paddingLeft="10dp"
+            android:gravity="start|center_vertical"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            />
+
+
+        <aivco.com.bluetooth_exe.CustomizedImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:background="@null"
+            android:id="@+id/switch_state"
+            android:src="@android:drawable/button_onoff_indicator_off"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            />
+
+
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:background="@null"
+            android:src="@android:drawable/ic_dialog_info"
+            android:id="@+id/switch_info"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:contentDescription="" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/descritor"
+        android:layout_weight="0.8"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textColor="@color/textcolor"
+        android:gravity="center_horizontal|center_vertical"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+
+
+        />
+
+
+
+</LinearLayout>

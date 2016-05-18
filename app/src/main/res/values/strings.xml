@@ -1,0 +1,35 @@
+<resources>
+
+    <string name="app_name">Bluetooth_Exe</string>
+    <string name="action_settings">Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="perform_scan">Perform Scan</string>
+    <string name="connection_status">Initiating Connection...</string>
+    <string name="startserver">Start Server</string>
+    <string name="switch_name">Switch Name</string>
+    <string name="description_name">Description</string>
+    <string name="save">Save</string>
+    <string name="connection_error">Pls ensure the switch is on,and in range of this mobile device.More information can be found at the help page</string>
+    <string name="connection_unsuccessfull">CONNECTION UNSUCCESSFUL</string>
+    <string name="hardwareinterface_apply">Apply</string>
+    <string name="delete">Delete</string>
+    <string name="socket_name_header">Socket Name</string>
+    <string name="socket_mac_address">Socket Mac Address</string>
+    <string name="saving_error">Error in Saving Socket</string>
+    <string name="saving_response">Either the switch have been previously saved or another switch shares the same name</string>
+
+    <!--custom_switch_interface -->
+    <string name="descritor">Description</string>
+
+
+    <string-array name="test">
+        <item>one</item>
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

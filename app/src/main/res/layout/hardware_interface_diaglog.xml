@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:layout_marginTop="0dp"
+    android:paddingTop="20dp"
+
+    >
+
+
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/switch_name"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold|italic"
+        android:textColor="@color/boldcolor"
+        android:id="@+id/name"
+
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_alignLeft="@+id/name"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:maxEms="20"
+        android:id="@+id/switch_value"
+        android:background="@null"
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description_name"
+        android:textStyle="bold|italic"
+        android:id="@+id/dis_name"
+        android:textColor="@color/boldcolor"
+        android:layout_below="@+id/switch_value"
+
+
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dis_name"
+        android:layout_alignLeft="@+id/name"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:id="@+id/dis_value"
+        android:background="@null"
+
+        />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/socket_name_header"
+        android:layout_alignLeft="@id/dis_name"
+        android:layout_below="@+id/dis_value"
+        android:textStyle="bold|italic"
+        android:textColor="@color/boldcolor"
+        android:id="@+id/socket_heading"
+
+
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/dis_name"
+        android:layout_below="@+id/socket_heading"
+        android:id="@+id/socket_name_value"
+        android:background="@null"
+
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/dis_name"
+        android:layout_below="@+id/socket_name_value"
+        android:textStyle="bold|italic"
+        android:textColor="@color/boldcolor"
+        android:id="@+id/socket_mac_address"
+        android:text="@string/socket_mac_address"
+
+
+
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/dis_name"
+        android:layout_below="@+id/socket_mac_address"
+        android:id="@+id/socket_mac_address_value"
+        android:background="@null"
+
+
+
+        />
+
+
+    <Button android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:layout_above="@+id/apply"
+        android:layout_marginLeft="0px"
+        android:layout_marginRight="0px"
+        android:background="@color/background"
+        android:id="@+id/delete"
+        android:textColor="@color/textcolor"
+        android:layout_marginStart="0px"
+
+        />
+
+    <Button android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:text="@string/hardwareinterface_apply"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="0px"
+        android:layout_marginRight="0px"
+        android:id="@+id/apply"
+        android:background="@color/background"
+        android:textColor="@color/textcolor"
+
+
+        />
+
+
+
+</RelativeLayout>
