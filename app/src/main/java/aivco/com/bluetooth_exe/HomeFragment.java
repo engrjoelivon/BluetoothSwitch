@@ -106,4 +106,11 @@ public class HomeFragment extends Fragment {
         // TODO: Update argument type and name
         void onHomeFragmentInteraction(Uri uri);
     }
+
+    public void bindToService(){
+
+
+    }
+
+
 }

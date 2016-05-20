@@ -55,14 +55,12 @@ public class MainActivity extends AppCompatActivity implements DeviseList.OnFrag
     public static final String SWITCHNAMEKEY ="key for switchname passed to confirmation dialog";
     public static final String SWITCHDESCRIPTIONKEY="key for switchdescription passed to confirmation dialog";;
     public static final String SWITCHSTATESELECTIONKEY="key for switchstate passed to confirmation dialog";;
-
     private BluetoothAdapter bs;
     private Set<BluetoothDevice> bondedDevise;
     private List<BluetoothDevice> bluetoothDevice;//created a bluetooth device because cant get items from set
     private BluetoothDevice connectedDevice;
     Toolbar toolbar;
     private static final String MAINFRAGMENT="mainfragment";
-    public static final String tag="bluetoothMainActivity";
     public static final String BLUETOOTHDEVICEKEY="remotebluetoothdevice";
     public static final String TYPEOFACTIONKEY="keyforvalidationaaction";//when contacting the clientservice,it needs to know what kind of action is intended
     private ProgressDialog pg;
@@ -72,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements DeviseList.OnFrag
     Switch btswitch;
     Bundle bundle;
     HomeFragment hm;
+    public String tag="MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +81,15 @@ public class MainActivity extends AppCompatActivity implements DeviseList.OnFrag
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Log.d(tag, "onCreate");
+        Log.d(tag, "onCreatemethod");
 
+
+        if(switchModuleDatabase.getBluetoothdevice().size() != 0){
+            Intent intent=new Intent();
+            intent.putStringArrayListExtra(BLUETOOTHDEVICEKEY,(ArrayList<String>)switchModuleDatabase.getBluetoothdevice());
+            intent.setClass(this,ClientSocketService.class);
+            startService(intent);
+        }
 
 
         hm=HomeFragment.getInstance();
@@ -96,11 +102,8 @@ public class MainActivity extends AppCompatActivity implements DeviseList.OnFrag
         //startFragment(mainFragment,"mainfragment",ADDTOBACKSTACK);
 
         //return true if bluetooth exist and is enabled,if not enabled carry out actions inside on activity result
-      if(checkIfBluetoothExist())
-      {
-
-      }
-      handleMessages();
+        checkIfBluetoothExist();
+        handleMessages();
         handleComplexMessages();
 
     }
@@ -314,6 +317,7 @@ public class MainActivity extends AppCompatActivity implements DeviseList.OnFrag
 
     /**@param  remoteDevice bluetooth device to connect to.If connection is successful execution returns to handler*/
     public void connectToServer(BluetoothDevice remoteDevice){
+        Log.d(tag,"connecting to server");
         bs.cancelDiscovery();//ensure to cancel discovery before making connection
         connectedDevice=remoteDevice;
         Intent intent=new Intent();
@@ -321,6 +325,7 @@ public class MainActivity extends AppCompatActivity implements DeviseList.OnFrag
         intent.putExtra(TYPEOFACTIONKEY, HandleCommunications.CHECKSTATUS);
         intent.setClass(this, ClientService.class);
         startService(intent);
+
         createDialog(getResources().getString(R.string.connection_status), this);
 
     }

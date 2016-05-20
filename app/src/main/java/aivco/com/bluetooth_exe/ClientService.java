@@ -4,10 +4,10 @@ import android.app.IntentService;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import java.util.logging.Logger;
+import android.os.IBinder;
+import android.util.Log;
 
 import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.util.UUID;
 
@@ -24,6 +24,7 @@ public class ClientService extends IntentService {
     private static final String ACTION_CONNECT = "aivco.com.bluetooth_exe.action.connect";
     private static final UUID uuid=UUID.fromString("a48b9d7d-2372-4ef0-ae85-d8a0ec369449");
     private BluetoothSocket bsocket;
+    private String tag="ClientService";
     // TODO: Rename parameters
     private BluetoothDevice thisdevice;
     public ClientService() {
@@ -36,20 +37,20 @@ public class ClientService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        System.out.println("....................ON hANDLE INTENT.....................");
-
+        Log.d(tag,"");
         try {
 
             startServerConnection(getDeviceFromGson(intent));
             connectToServer();
-            System.out.println("connection was successful"+bsocket.getRemoteDevice().getName());
+            Log.d(tag,"connection was successful"+bsocket.getRemoteDevice().getName());
             HandleCommunications hc=new HandleCommunications(bsocket,HandleCommunications.CLIENT,HandleCommunications.CHECKSTATUS);
             new Thread(hc).start();
             MainActivity.handler.sendEmptyMessage(MainActivity.CONNECTIONCOMPLETED);
         } catch (IOException e)
         {
            // e.printStackTrace();
-            System.out.println("there is error while client is connecting");
+
+            Log.e(tag,"there is error while client is connecting",e.getCause());
             MainActivity.handler.sendEmptyMessage(MainActivity.CONNECTIONUNSUCCESSFUL);
             try {
                 bsocket.close();
@@ -63,7 +64,7 @@ public class ClientService extends IntentService {
     private BluetoothDevice getDeviceFromGson(Intent intent){
         String extras = intent.getStringExtra(MainActivity.BLUETOOTHDEVICEKEY);
         BluetoothDevice bdevice=new Gson().fromJson(extras, BluetoothDevice.class);
-        System.out.println("device is "+bdevice);
+        Log.d(tag,"device is "+bdevice);
         return bdevice;
     }
 
@@ -82,18 +83,28 @@ public class ClientService extends IntentService {
     private void setBluetoothSocket(BluetoothDevice remotedevice) throws IOException
     {
         bsocket=remotedevice.createRfcommSocketToServiceRecord(uuid);
+        if(bsocket.isConnected())
+        {
+            bsocket.close();
+        }
 
     }
 
     private void connectToServer() throws IOException {
-
+        Log.d(tag,"connectToServer");
         bsocket.connect();
+
 
 
     }
 
+    public BluetoothSocket getBluetoothSocket(){
+        return bsocket;
+    }
 
 
-
-
+    @Override
+    public IBinder onBind(Intent intent) {
+        return super.onBind(intent);
+    }
 }

@@ -25,6 +25,10 @@
         <service
             android:name=".ClientService"
             android:exported="false" />
+        <service
+            android:name=".ClientSocketService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

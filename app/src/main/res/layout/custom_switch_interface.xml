@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.8"
-        android:src="@android:drawable/stat_sys_data_bluetooth"
         android:focusableInTouchMode="false"
         android:id="@+id/connection_status"
         />

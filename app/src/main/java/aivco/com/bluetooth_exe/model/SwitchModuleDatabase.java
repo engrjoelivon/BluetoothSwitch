@@ -80,6 +80,16 @@ public class SwitchModuleDatabase extends Switch
         return null;
     }
 
+    public List<String> getBluetoothdevice(){
+   List<String> bluetoodev=new ArrayList<>();
+        Cursor c=switchDb.getAllBluetoothDevice();
+       if(c.moveToNext())
+       {
+           bluetoodev.add(c.getString(c.getColumnIndex(BLUETOOTHDEVICECOL)));
+       }
+        return bluetoodev;
+    }
+
     public void deleteSwitch(String name)
     {
 
@@ -140,7 +150,7 @@ public class SwitchModuleDatabase extends Switch
 
         public Cursor getSwitch(String keyword){
             readsql= getReadableDatabase();
-           return  readsql.rawQuery("select * from "+SWITCHTABLE+" where "+NAMECOl+" = ?",new String[]{keyword});
+           return  readsql.rawQuery("select * from " + SWITCHTABLE + " where " + NAMECOl + " = ?", new String[]{keyword});
         }
 
         public void removeSwitch(String name)
@@ -149,6 +159,11 @@ public class SwitchModuleDatabase extends Switch
 
             readsql.delete(SWITCHTABLE, NAMECOl + " =?", new String[]{name});
             readsql.close();
+
+        }
+        public Cursor getAllBluetoothDevice(){
+            readsql= getReadableDatabase();
+            return  readsql.rawQuery("select "+BLUETOOTHDEVICECOL+ " from "+SWITCHTABLE,null);
 
         }
 

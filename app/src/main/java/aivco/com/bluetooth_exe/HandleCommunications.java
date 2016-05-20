@@ -9,9 +9,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import android.util.Log;
 
 /**
- * Created by johnanderson1 on 5/14/16.
+ * Created by joel on 5/14/16.
  */
 public class HandleCommunications implements  Runnable{
     BluetoothSocket thissocket;
@@ -25,7 +26,7 @@ public class HandleCommunications implements  Runnable{
     public static final String ON="on";
     public static final String OFF="off";
     public static final String OTHERMESS="unmeaningful message";//
-    public static final String TYPEOFACTIONKEY="keyforvalidationaaction";//when contacting the clientservice,it needs to know what kind of action is intended
+    public String tag="HandleCommunications";
 
 
 
@@ -34,6 +35,7 @@ public class HandleCommunications implements  Runnable{
      * */
     public HandleCommunications(BluetoothSocket socket,int whichConnection,String mess) {
         System.out.println("HandleCommunications constructor");
+        Log.d(tag,"HandleCommunications constructor");
         this.thissocket=socket;
         this.whoisconnecting=whichConnection;
         this.mess=mess;
@@ -42,30 +44,26 @@ public class HandleCommunications implements  Runnable{
 
     @Override
     public void run() {
-        System.out.println("run method");
-
+        Log.d(tag,"run method");
         try{
 
         if(whoisconnecting == CLIENT)
             {write(mess);
               String res= read();
-                System.out.println("RESULT FROM READING " + res);
-                        close();
+                Log.d(tag,"RESULT FROM READING " + res);
+                       // close();
             }
         //server connection whoisconnecting ==SERVER
         else{
-            String clientMess=read();
-            System.out.println("done reading message " +clientMess);
 
-            verifyClientMessage(clientMess);
-            write(verifyClientMessage(clientMess));
+
+            liveServer();
 
             }
         }
 
         catch (IOException e) {
-            System.out.println("there is error in read");
-
+            Log.e(tag,"there was error when read ",e.fillInStackTrace());
             e.printStackTrace();
         }
 
@@ -73,25 +71,26 @@ public class HandleCommunications implements  Runnable{
 
 
     public String read() throws IOException {
-        System.out.println("now in read method");
+        Log.d(tag,"in read method RESULT FROM READING ");
         BufferedReader br=new BufferedReader(new InputStreamReader(thissocket.getInputStream()));
         return br.readLine();
     }
     public void write(String message) throws IOException {
-        System.out.println("write methiod" +message);
+        Log.d(tag,"RESULT FROM READING " +message);
         BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(thissocket.getOutputStream()));
         bw.write(message);
         bw.newLine();
         bw.flush();
-        System.out.println("write complete");
+        Log.d(tag,"write complete");
 
 
 
     }
 
     public void close() throws IOException {
-        System.out.println("I am closing");
+        Log.d(tag,"I am closing");
         thissocket.close();
+
 
     }
 
@@ -118,6 +117,29 @@ public class HandleCommunications implements  Runnable{
         }
 
         return res;
+    }
+
+
+
+    /**live server runs inside a loop,any client that connects to it,will have its connection live*/
+
+    public void liveServer()throws IOException{
+        while (true)
+        {
+            String clientMess=read();
+            Log.d(tag,"done reading message " +clientMess);
+            verifyClientMessage(clientMess);
+            write(verifyClientMessage(clientMess));
+
+        }
+
+    }
+    /**used only during testing process runs once and closes*/
+    public void developmentalServer() throws IOException{
+        String clientMess=read();
+        Log.d(tag,"done reading message " +clientMess);
+        verifyClientMessage(clientMess);
+        write(verifyClientMessage(clientMess));
     }
 }
 

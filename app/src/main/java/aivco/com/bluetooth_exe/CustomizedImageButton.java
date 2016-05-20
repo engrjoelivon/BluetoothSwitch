@@ -2,11 +2,16 @@ package aivco.com.bluetooth_exe;
 
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 
 /**
- * Created by johnanderson1 on 5/18/16.
+ * Created by joel on 5/18/16.
+ * Extended the ImageButton class so as to be able to add the getConnection instance and
+ * set connection Instance method.
+ * Need the connection Instance which is a bluetooth socket,to connect to bluetooth to communicate
+ * with remoteHardware
  */
 public class CustomizedImageButton extends ImageButton {
     BluetoothSocket bts;
@@ -14,6 +19,8 @@ public class CustomizedImageButton extends ImageButton {
     public CustomizedImageButton(Context context) {
         super(context);
     }
+
+    Handler handler;
 
     public CustomizedImageButton(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -23,19 +30,20 @@ public class CustomizedImageButton extends ImageButton {
         super(context, attrs, defStyleAttr);
     }
 
-    public CustomizedImageButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+
+
+
+
+    public BluetoothSocket getConnectionInstance(){
+        return this.bts;
+    }
+
+    public void setConnectionInstance(BluetoothSocket connectionInstance){
+        this.bts=connectionInstance;
     }
 
 
 
-    public String getConnectionInstance(){
 
-  return this.name;
-    }
 
-    public void setConnectionInstance(String connectionInstance){
-
-    this.name=connectionInstance;
-    }
 }
